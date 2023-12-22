@@ -15,6 +15,13 @@ public class Enseignant {
 
     public Enseignant() {
     }
+    // Constructeur prenant quatre chaînes de caractères
+    public Enseignant(String nom, String prenom, String email, String grade) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.grade = grade;
+    }
 
     public Enseignant(String nom, String prenom, String email, String grade, Departement dept) {
         this.nom = nom;
