@@ -4,8 +4,9 @@ import services.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import static services.EnseignantServices.enseignants;
+import static services.DepartementServices.departements;
 public class EnseignantController {
-    public static void AfficheMenu(){
+    public static void AfficheMenu() {
         System.out.println("=======================[ Enseignants ]==============================");
 
 
@@ -18,7 +19,7 @@ public class EnseignantController {
         Scanner s = new Scanner(System.in);
         System.out.println("Entrez une option : ");
         int option = s.nextInt();
-        switch(option) {
+        switch (option) {
             case 1:
                 creerEnseignant();
                 break;
@@ -35,21 +36,23 @@ public class EnseignantController {
                 main.mainTest.AffichePrincipalMenu();
         }
     }
-    public static void AfficherEnseignants(){
+
+    public static void AfficherEnseignants() {
         for (Enseignant enseignant : enseignants) {
             System.out.print("Id : " + enseignant.getId());
             System.out.print(" | Nom : " + enseignant.getNom());
             System.out.print(" | Prenom : " + enseignant.getPrenom());
             System.out.print(" | Email : " + enseignant.getEmail());
             System.out.print(" | Grade : " + enseignant.getGrade());
-            if (! main.mainTest.isNull(enseignant.getDept())) {
+            if (!main.mainTest.isNull(enseignant.getDept())) {
                 System.out.print(" | Departement : " + enseignant.getDept().getIntitule());
             }
             System.out.println("");
         }
 
     }
-    public static void creerEnseignant(){
+
+    public static void creerEnseignant() {
         Scanner s = new Scanner(System.in);
         System.out.println("Entrez Nom : ");
         String Nom = s.nextLine();
@@ -62,11 +65,12 @@ public class EnseignantController {
         DepartementController.AfficherDepartements();
         System.out.println("Veuillez séléctionner un Département par id");
         int id = s.nextInt();
-        EnseignantServices.AjoutEnseignant(Nom,Prenom,Email,Grade,DepartementServices.getDeptById(id));
+        EnseignantServices.AjoutEnseignant(Nom, Prenom, Email, Grade, DepartementServices.getDeptById(id));
         AfficherEnseignants();
         AfficheMenu();
     }
-    public static void ModifieEnseignant(){
+
+    public static void ModifieEnseignant() {
         AfficherEnseignants();
         Scanner s = new Scanner(System.in);
         // on affiche les enseignants pour que l'utilisateur modifie un anseiganst deja existe
@@ -83,11 +87,12 @@ public class EnseignantController {
         DepartementController.AfficherDepartements();
         System.out.println("Sélectionné un departement par id");
         int NouvId = s.nextInt();
-        EnseignantServices.modifierEnseignant(id,Nom,Prenom,Email,Grade,DepartementServices.getDeptById(NouvId));
+        EnseignantServices.modifierEnseignant(id, Nom, Prenom, Email, Grade, DepartementServices.getDeptById(NouvId));
         AfficherEnseignants();
         AfficheMenu();
     }
-    public static void SupprimerEnseignant(){
+
+    public static void SupprimerEnseignant() {
         Scanner s = new Scanner(System.in);
         AfficherEnseignants();
         System.out.println("sélectionner un id ");
@@ -96,3 +101,4 @@ public class EnseignantController {
         AfficherEnseignants();
     }
 }
+

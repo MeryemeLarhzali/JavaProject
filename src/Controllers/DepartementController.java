@@ -6,6 +6,7 @@ import services.EnseignantServices;
 import java.util.Scanner;
 import static services.DepartementServices.departements;
 import static main.mainTest.AffichePrincipalMenu;
+import java.util.List;
 
 public class DepartementController {
     public static void AfficheMenu(){
@@ -13,7 +14,7 @@ public class DepartementController {
 
 
         System.out.println("1: Pour ajouter un département");
-        //System.out.println("2: Pour afficher les départements");
+        System.out.println("2: Pour afficher les départements");
         System.out.println("3: Pour modifier un département");
         System.out.println("4: Pour supprimer un département");
         System.out.println("0: Pour retourner au menu principal");
@@ -39,10 +40,11 @@ public class DepartementController {
         }
     }
     public static void AfficherDepartements(){
-        for (Departement departement : departements ) {
+        List<Departement> departements = DepartementServices.getAllDepartements();
+        for (Departement departement : departements) {
             System.out.print("Id : " + departement.getId());
             System.out.print(" | Intitulé : " + departement.getIntitule());
-            if (! main.mainTest.isNull(departement.getChef())) {
+            if (departement.getChef() != null) {
                 System.out.print(" | Chef : " + departement.getChef().getNom() + " " + departement.getChef().getPrenom());
             }
             System.out.println("");
@@ -79,7 +81,7 @@ public class DepartementController {
         AfficherDepartements();
         System.out.println("sélectionner un id ");
         int id = s.nextInt();
-        DepartementServices.supprimerDeptById(id);
+        DepartementServices.deleteDepartement(id);
         AfficherDepartements();
     }
 }
